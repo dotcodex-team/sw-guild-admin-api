@@ -1,7 +1,5 @@
 const jwt = require('jsonwebtoken');
 
-const options = { expiresIn: '60m' };
-const refreshOptions = { expiresIn: '365 days' };
 const { SECRET_KEY, REFRESH_KEY } = require('../config').keys;
 
 const getUserInfo = (user) => ({
@@ -11,11 +9,13 @@ const getUserInfo = (user) => ({
 });
 
 const signToken = (user) => {
+  const options = { expiresIn: process.env.JWT_EXPIRES_IN };
   const token = jwt.sign({ sub: user.id }, SECRET_KEY, options);
   return token;
 };
 
 const signRefreshToken = (user) => {
+  const refreshOptions = { expiresIn: process.env.JWT_REFRESH_EXPIRES_IN };
   const token = jwt.sign({ sub: user.id }, REFRESH_KEY, refreshOptions);
   return token;
 };

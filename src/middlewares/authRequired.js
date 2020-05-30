@@ -7,7 +7,7 @@ export default async function authRequired(req, res, next) {
 
     if (authHeader.startsWith('Bearer ')) {
       const decoded = await verifyToken(token);
-      req.user = decoded;
+      req.user = decoded.sub;
       return next();
     }
     return res.status(401).send({

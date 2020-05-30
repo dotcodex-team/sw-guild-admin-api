@@ -1,5 +1,5 @@
 import express from 'express';
-import passport from 'passport';
+// import passport from 'passport';
 import cors from '../middlewares/cors';
 import hasRefreshToken from '../middlewares/hasRefreshToken';
 import { validateRegister } from '../validators/authValidators';
@@ -8,12 +8,13 @@ import {
   loginUser,
   refreshToken
 } from '../controllers/AuthController';
+import authRequired from '../middlewares/authRequired';
 
 
 const router = express.Router();
 cors(router);
 
-router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => {
+router.get('/', authRequired, (req, res) => {
   res.json({ hello: 'Hi from auth' });
 });
 
@@ -21,6 +22,6 @@ router.post('/register', [validateRegister, createUser]);
 
 router.post('/login', loginUser);
 
-router.post('/refresh', hasRefreshToken, refreshToken);
+router.put('/refresh', hasRefreshToken, refreshToken);
 
 module.exports = router;

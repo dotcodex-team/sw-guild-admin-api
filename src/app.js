@@ -3,12 +3,9 @@ import express from 'express';
 import morgan from 'morgan';
 import helmet from 'helmet';
 import cookieParser from 'cookie-parser';
-import passport from 'passport';
 import { notFound, errorHandler } from './errorMiddlewares';
 import routes from './routes';
-import configPassport from './config/passport';
 
-require('dotenv').config();
 
 const cloudinary = require('cloudinary').v2;
 
@@ -21,9 +18,6 @@ if (typeof (process.env.CLOUDINARY_URL) === 'undefined') {
 const app = express();
 app.use(morgan('dev'));
 app.use(helmet());
-// Passport config
-configPassport(passport);
-app.use(passport.initialize());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

@@ -82,11 +82,9 @@ export const loginUser = async (req, res, next) => {
 
 export const refreshToken = async (req, res, next) => {
   try {
-    const { email } = req.user;
+    const user = await User.findByPk(req.user);
 
-    const user = await User.findOne({ where: { email } });
-
-    if (req.query.refreshToken === user.refreshToken) {
+    if (req.body.refreshToken === user.refreshToken) {
       const token = signToken(user);
 
       const userInfo = getUserInfo(user);
