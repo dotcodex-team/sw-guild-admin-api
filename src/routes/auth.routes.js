@@ -10,7 +10,6 @@ import {
 } from '../controllers/AuthController';
 import authRequired from '../middlewares/authRequired';
 
-
 const router = express.Router();
 cors(router);
 

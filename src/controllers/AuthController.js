@@ -1,10 +1,6 @@
 import bcrypt from 'bcryptjs';
 import models from '../models';
-import {
-  getUserInfo,
-  signRefreshToken,
-  signToken
-} from '../utils/jwt';
+import { getUserInfo, signRefreshToken, signToken } from '../utils/jwt';
 
 const { User } = models;
 
@@ -26,6 +22,7 @@ export const createUser = async (req, res, next) => {
 
     if (checkIfUserExists) {
       res.status(400);
+
       const err = new Error('Ya existe un usuario registrado con este email');
       next(err);
     } else {
@@ -71,7 +68,9 @@ export const loginUser = async (req, res, next) => {
       }
     }
     res.status(400);
-    const err = new Error('La dirección de email o la contraseña son incorrectos. Por favor intenténtelo nuevamente.');
+    const err = new Error(
+      'La dirección de email o la contraseña son incorrectos. Por favor intenténtelo nuevamente.'
+    );
     return next(err);
     // eslint-disable-next-line
     return;

@@ -6,10 +6,9 @@ import cookieParser from 'cookie-parser';
 import { notFound, errorHandler } from './errorMiddlewares';
 import routes from './routes';
 
-
 const cloudinary = require('cloudinary').v2;
 
-if (typeof (process.env.CLOUDINARY_URL) === 'undefined') {
+if (typeof process.env.CLOUDINARY_URL === 'undefined') {
   console.warn('!! cloudinary config is undefined !!');
 } else {
   console.log('cloudinary config', cloudinary.config() ? 'OK' : 'FAIL');
@@ -17,6 +16,7 @@ if (typeof (process.env.CLOUDINARY_URL) === 'undefined') {
 
 const app = express();
 app.use(morgan('dev'));
+
 app.use(helmet());
 
 app.use(express.json());
@@ -28,7 +28,6 @@ app.get('/', (req, res) => {
     message: 'Hi!! ✨'
   });
 });
-
 
 app.use('/api', routes);
 

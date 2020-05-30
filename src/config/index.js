@@ -25,9 +25,7 @@ module.exports = {
     dialect: 'mysql'
   },
   keys: {
-    SECRET_KEY:
-      process.env.SECRET_KEY || 'a31eb4f32dac0841fd4b14dba5a09468',
-    REFRESH_KEY:
-      process.env.REFRESH_KEY || 'ab118c088d90596b62c6467c2b815b2c'
+    SECRET_KEY: process.env.SECRET_KEY || 'a31eb4f32dac0841fd4b14dba5a09468',
+    REFRESH_KEY: process.env.REFRESH_KEY || 'ab118c088d90596b62c6467c2b815b2c'
   }
 };

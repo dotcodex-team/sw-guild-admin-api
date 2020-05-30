@@ -48,7 +48,7 @@ const models = Object.assign(
 // eslint-disable-next-line
 for (const model of Object.keys(models)) {
   // eslint-disable-next-line
-  typeof models[model].associate === "function" &&
+  typeof models[model].associate === 'function' &&
     models[model].associate(models);
 }
 
